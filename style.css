@@ -1,0 +1,92 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    outline: none  ;
+}
+body{
+    background-color: hsla(260, 97%, 65%, 1);
+}
+.logo{
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+    display: block ;
+}
+main{
+    border-radius: 20px;
+    background: hsla(0, 0%, 96%, 1);
+    width: 375px;
+    margin: 0 auto 40px;
+    padding: 44px 24px 23px;
+}
+label{
+    color: hsla(0, 0%, 47%, 1);
+    font-size: 14px;
+    font-weight: 400;
+
+}
+select, input{
+    background: hsla(0, 0%, 100%, 1);
+    border: 1px solid hsla(0, 0%, 73%, 1);
+    border-radius: 4px;
+    width: 100%;
+    height: 48px;
+    margin-top: 3px;
+    margin-bottom: 24px;
+    appearance: none;
+    cursor: pointer;
+    padding-left: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    color: hsla(0, 0%, 33%, 1);
+
+}
+input, button, select{
+    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.25); 
+}
+button{
+    background-color: hsla(266, 65%, 51%, 1);
+    border: none;
+    height: 48px;
+    border-radius: 5px;
+    width: 100%;
+    color: hsla(0, 0%, 100%, 1);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+}
+button:hover{
+    opacity: 0.8;
+}
+button:active{
+    opacity: 0.6;
+}
+section{
+    border: 1px solid hsla(266, 65%, 51%, 1);
+    border-radius: 20px;
+    margin-top: 36px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.arrow-img{
+    margin: 15px 0;
+}
+.currency-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}   
+.currency{
+    color: hsla(0, 0%, 47%, 1);
+    font-size: 14px;
+}
+.currency-value, .currency-value-to-convert{
+    color: hsla(0, 0%, 33%, 1);
+    font-size: 20px;
+    font-weight: 700;
+}
