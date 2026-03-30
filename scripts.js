@@ -75,6 +75,6 @@ currencySelect.addEventListener('change', () =>{
         currencyName.textContent = 'Libra'
         currencyImg.src = 'assets/Libra.png'
     }
-    convertValues()
+    convertValues() // Deixa o botao converter inutil
 })
 
