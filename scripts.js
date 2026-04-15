@@ -1,30 +1,50 @@
 const convertButton = document.querySelector('.convert-button');    
 const currencySelect = document.querySelector('.currency-select');
 let rates = null
+let rateBtc = null
+
+// DOLAR, EURO e LIBRA
+
 async function getRates() {
   const response = await fetch("https://v6.exchangerate-api.com/v6/458cc18b904dda275013f150/latest/BRL");
   const data = await response.json();
 
   return { 
-    usd: data.conversion_rates.USD,
-    eur: data.conversion_rates.EUR,
-    gbp: data.conversion_rates.GBP
-}
+        usd: data.conversion_rates.USD,
+        eur: data.conversion_rates.EUR,
+        gbp: data.conversion_rates.GBP
+    }
 }
 async function loadRates() {
   rates = await getRates();
 }
+
 loadRates()
 
-async function convertValues() {
+// BITCOIN
+async function getBitcoin() {
+  const response = await fetch("https://api.coingecko.com/api/v3/simple/price?vs_currencies=brl&ids=bitcoin&x_cg_demo_api_key=CG-gyp1TfgXVzLrg2k9fADqZog4");
+  const data = await response.json();
+    return data.bitcoin.brl
+    
+}
+getBitcoin()
+async function loadRatesBtc() {
+  rateBtc = await getBitcoin();
+}
+loadRatesBtc()
+
+// CONVERTER VALORES
+
+function convertValues() {
     const inputCurrencyValue = document.querySelector('.input-currency').value;
     const currencyValueToConvert = document.querySelector('.currency-value-to-convert');
     const currencyValueConverted = document.querySelector('.currency-value');
-    // const rates = await getRates();
-    // const dolarToday = 5.2
-    // const euroToday = 6.2
+    /* const rates = await getRates();
+    const dolarToday = 5.2
+    const euroToday = 6.2
     const bitcoinToday = 360.000
-    const libraToday = 6.8
+    const libraToday = 6.8 */
 
 
 
@@ -47,7 +67,7 @@ async function convertValues() {
             style: 'currency',
             currency: 'BTC',
             minimumFractionDigits: 6
-        }).format(inputCurrencyValue / bitcoinToday);
+        }).format(inputCurrencyValue * rateBtc);
     }
     if (currencySelect.value === 'libra') {
         currencyValueConverted.textContent = new Intl.NumberFormat('en-GB', { 
