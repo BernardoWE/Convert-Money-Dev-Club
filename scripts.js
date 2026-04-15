@@ -1,14 +1,28 @@
 const convertButton = document.querySelector('.convert-button');    
 const currencySelect = document.querySelector('.currency-select');
 
+async function getRates() {
+  const response = await fetch("https://v6.exchangerate-api.com/v6/458cc18b904dda275013f150/latest/BRL");
+  const data = await response.json();
+console.log(data)
+  const usd = data.conversion_rates.USD;
+  const eur = data.conversion_rates.EUR;
 
-function convertValues() {
+  return { 
+    usd: data.conversion_rates.USD,
+    eur: data.conversion_rates.EUR,
+    gbp: data.conversion_rates.GBP
+}
+}
+
+
+async function convertValues() {
     const inputCurrencyValue = document.querySelector('.input-currency').value;
     const currencyValueToConvert = document.querySelector('.currency-value-to-convert');
     const currencyValueConverted = document.querySelector('.currency-value');
-    
-    const dolarToday = 5.2
-    const euroToday = 6.2
+    const rates = await getRates();
+    // const dolarToday = 5.2
+    // const euroToday = 6.2
     const bitcoinToday = 360.000
     const libraToday = 6.8
 
@@ -18,14 +32,14 @@ function convertValues() {
         currencyValueConverted.textContent = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD' 
-    }).format(inputCurrencyValue / dolarToday);
+    }).format(inputCurrencyValue * rates.usd);
     }
 
     if (currencySelect.value === 'euro') {
         currencyValueConverted.textContent = new Intl.NumberFormat('de-DE', {
             style: 'currency',
             currency: 'EUR'
-        }).format(inputCurrencyValue / euroToday);
+        }).format(inputCurrencyValue * rates.eur);
     }
 
     if (currencySelect.value === 'bitcoin') {
@@ -39,7 +53,7 @@ function convertValues() {
         currencyValueConverted.textContent = new Intl.NumberFormat('en-GB', { 
             style: 'currency', 
             currency: 'GBP' 
-        }).format(inputCurrencyValue / libraToday);
+        }).format(inputCurrencyValue * rates.gbp);
     }
 
 
