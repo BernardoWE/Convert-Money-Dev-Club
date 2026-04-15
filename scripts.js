@@ -1,12 +1,9 @@
 const convertButton = document.querySelector('.convert-button');    
 const currencySelect = document.querySelector('.currency-select');
-
+let rates = null
 async function getRates() {
   const response = await fetch("https://v6.exchangerate-api.com/v6/458cc18b904dda275013f150/latest/BRL");
   const data = await response.json();
-console.log(data)
-  const usd = data.conversion_rates.USD;
-  const eur = data.conversion_rates.EUR;
 
   return { 
     usd: data.conversion_rates.USD,
@@ -14,13 +11,16 @@ console.log(data)
     gbp: data.conversion_rates.GBP
 }
 }
-
+async function loadRates() {
+  rates = await getRates();
+}
+loadRates()
 
 async function convertValues() {
     const inputCurrencyValue = document.querySelector('.input-currency').value;
     const currencyValueToConvert = document.querySelector('.currency-value-to-convert');
     const currencyValueConverted = document.querySelector('.currency-value');
-    const rates = await getRates();
+    // const rates = await getRates();
     // const dolarToday = 5.2
     // const euroToday = 6.2
     const bitcoinToday = 360.000
